@@ -8,9 +8,6 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
-from gameui import GameUI
-from gamestate import GameState
-from gameover import GameOver
 
 
 def draw_text(screen, text, font, color, x, y):
@@ -67,6 +64,10 @@ def main():
     score = 0
     font = pygame.font.Font(None, 36)
 
+    # Load background image
+    background = pygame.image.load("assets/images/background.png").convert()
+    background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))  # Scale if needed
+
     # creating groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -107,8 +108,8 @@ def main():
                     asteroid.split()
                     score += 100
 
-        # Black screen
-        screen.fill((0,0,0))
+        # draw background screen
+        screen.blit(background, (0, 0))
 
         # player movements
         for obj in drawable:
